@@ -7,9 +7,17 @@ def generate_dominoes():
             dominos_tiles.append((i,y))
     return dominos_tiles
 
-
 def shuffle_tiles(deck):
    random.shuffle(deck)
    return deck
 
-def deal_game():
+def deal_game(shuffled_deck):
+    hand = {
+    "me" : shuffled_deck[0:7],
+    "right_p" : shuffled_deck[7:14],
+    "partner" : shuffled_deck[14:21],
+    "left_p" : shuffled_deck[21:28],
+    }
+    return hand
+
+
