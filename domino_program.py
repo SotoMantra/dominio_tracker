@@ -20,4 +20,7 @@ def deal_game(shuffled_deck):
     }
     return hand
 
-
+deck = generate_dominoes()
+shuffled_deck = shuffle_tiles(deck)
+hands = deal_game(shuffled_deck)
+print(hands)
