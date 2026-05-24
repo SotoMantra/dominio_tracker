@@ -24,3 +24,22 @@ deck = generate_dominoes()
 shuffled_deck = shuffle_tiles(deck)
 hands = deal_game(shuffled_deck)
 print(hands)
+
+def input_parsing():
+    player_map = {
+        'm':'me',
+        'r':'right_p',
+        'p':'partner',
+        'l':'left_p'
+    }
+
+    player_input = input("Who played? ")
+    parts = player_input.split()
+
+    player = player_map[parts[0]]
+    tile_played = (int(parts[1][0]), int(parts[1][1]))
+    return player, tile_played
+
+player, tile = input_parsing()
+print(player)
+print(tile)
