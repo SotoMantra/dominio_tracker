@@ -63,7 +63,10 @@ def counting_tiles_left(number, my_hand, played_tiles):
 deck = generate_dominoes()
 shuffled_deck = shuffle_tiles(deck)
 hands = deal_game(shuffled_deck)
-print(hands)
+
+for player, tiles in hands.items():
+    print(f"{player}: {tiles}")
+
 my_hand = hands['me']
 print(my_hand)
 
