@@ -43,3 +43,18 @@ def input_parsing():
 player, tile = input_parsing()
 print(player)
 print(tile)
+
+played_tiles = {
+    0: [],
+    1: [],
+    2: [],
+    3: [],
+    4: [],
+    5: [],
+    6: [],
+  }
+
+def in_board(tile, played_tiles):
+    played_tiles[tile[0]].append(tile)
+    played_tiles[tile[1]].append(tile)
+
