@@ -20,11 +20,6 @@ def deal_game(shuffled_deck):
     }
     return hand
 
-deck = generate_dominoes()
-shuffled_deck = shuffle_tiles(deck)
-hands = deal_game(shuffled_deck)
-print(hands)
-
 def input_parsing():
     player_map = {
         'm':'me',
@@ -40,10 +35,6 @@ def input_parsing():
     tile_played = (int(parts[1][0]), int(parts[1][1]))
     return player, tile_played
 
-player, tile = input_parsing()
-print(player)
-print(tile)
-
 played_tiles = {
     0: [],
     1: [],
@@ -58,3 +49,13 @@ def in_board(tile, played_tiles):
     played_tiles[tile[0]].append(tile)
     played_tiles[tile[1]].append(tile)
 
+def counting_tiles_left(number, my_hand, played_tiles):
+    count_in_hand = 0
+    for i in my_hand:
+        if number in i:
+            count_in_hand += 1
+
+    count_in_played = len(played_tiles[number])
+    remaining_tiles = 7 - count_in_hand - count_in_played
+
+    return remaining_tiles
