@@ -59,3 +59,20 @@ def counting_tiles_left(number, my_hand, played_tiles):
     remaining_tiles = 7 - count_in_hand - count_in_played
 
     return remaining_tiles
+
+deck = generate_dominoes()
+shuffled_deck = shuffle_tiles(deck)
+hands = deal_game(shuffled_deck)
+print(hands)
+my_hand = hands['me']
+print(my_hand)
+
+player, tile = input_parsing()
+print(player)
+print(tile)
+
+in_board(tile, played_tiles)
+
+remaining = counting_tiles_left(0, my_hand, played_tiles)
+
+print(remaining)
