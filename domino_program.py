@@ -9,10 +9,10 @@ def generate_dominoes():
             dominos_tiles.append((i,y))
     return dominos_tiles
 
-def shuffle_tiles(deck):
-    """Shuffles the deck in place"""
-    random.shuffle(deck)
-    return deck
+def shuffle_tiles(dominoes):
+    """Shuffles all dominoes tiles"""
+    random.shuffle(dominoes)
+    return dominoes
 
 def deal_game(shuffled_deck):
     """Deal 7  tiles of each 4 players"""
@@ -27,6 +27,7 @@ def deal_game(shuffled_deck):
 # ===== INPUT & TRACKING FUNCTION =====
 def input_parsing():
     """Parses user input into player and tile"""
+    global player, tile_played
     player_map = {
         'm':'me',
         'r':'right_p',
@@ -35,9 +36,12 @@ def input_parsing():
     }
     player_input = input("Who played ? ")
     parts = player_input.split()
-
-    player = player_map[parts[0]]
-    tile_played = (int(parts[1][0]), int(parts[1][1]))
+    if len(parts) == 2:
+        player = player_map[parts[0]]
+        tile_played = (int(parts[1][0]), int(parts[1][1]))
+    if len(parts) == 1:
+        player = player_map[parts[0]]
+        tile_played = "Pass"
     return player, tile_played
 
 def in_board(tile, played_tiles):
@@ -58,6 +62,10 @@ def counting_tiles_left(number, my_hand, played_tiles):
 
     return remaining_tiles
 
+def update_tile_count(player, tile_counts):
+    tile_counts[player] -= 1
+
+
 # ===== SETUP PHASE =====
 deck = generate_dominoes()
 shuffled_deck = shuffle_tiles(deck)
@@ -71,7 +79,14 @@ played_tiles = {
     4: [],
     5: [],
     6: [],
-  }
+ }
+
+tile_counts = {
+    "me": 7,
+    "right_player": 7,
+    "partner": 7,
+    "left_player": 7
+ }
 
 # ===== USAGE PHASE =====
 my_hand = hands['me']
@@ -82,7 +97,7 @@ for player, tiles in hands.items():
 print(f"\nYour hand: {my_hand}")
 
 # Get a play
-player, tile = input_parsing() 
+player, tile = input_parsing()
 print(player)
 print(tile)
 in_board(tile, played_tiles)
@@ -90,4 +105,24 @@ in_board(tile, played_tiles)
 # Calculate remaining
 remaining = counting_tiles_left(0, my_hand, played_tiles)
 print(f"remaining tiles with 0: {remaining}")
+
+def play_game(my_hand, played_tiles, starting_player):
+    # Game logic
+    players = ['me', 'right_player', 'partner', 'left_player']
+    current_index = 0
+    pass_counter = 0
+
+    while True:
+        current_player = players[current_index]
+
+        player, tile = input_parsing()
+
+        if tile =='Pass':
+            pass_counter + 1
+        else:
+            pass_counter = 0
+            in_board
+
+        current_index = (current_index + 1) % 4
+
 
